@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A Special Question For You 💕</title>
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            overflow: hidden;
+            position: relative;
+        }
+
+        .hearts-background {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: 0;
+        }
+
+        .heart {
+            position: absolute;
+            font-size: 30px;
+            animation: float 6s infinite ease-in-out;
+            opacity: 0.6;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.6;
+            }
+            90% {
+                opacity: 0.6;
+            }
+            100% {
+                transform: translateY(-100px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 60px 50px;
+            border-radius: 30px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            text-align: center;
+            max-width: 600px;
+            width: 90%;
+            position: relative;
+            z-index: 1;
+            animation: slideIn 0.8s ease-out;
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: scale(0.5) rotate(-5deg);
+                opacity: 0;
+            }
+            to {
+                transform: scale(1) rotate(0deg);
+                opacity: 1;
+            }
+        }
+
+        .emoji {
+            font-size: 80px;
+            animation: bounce 1s infinite;
+            display: inline-block;
+        }
+
+        @keyframes bounce {
+            0%, 100% {
+                transform: translateY(0) scale(1);
+            }
+            50% {
+                transform: translateY(-20px) scale(1.1);
+            }
+        }
+
+        h1 {
+            font-family: 'Pacifico', cursive;
+            color: #764ba2;
+            font-size: 42px;
+            margin: 30px 0 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .question {
+            font-size: 24px;
+            color: #333;
+            margin: 30px 0;
+            font-weight: 600;
+            line-height: 1.6;
+        }
+
+        .buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            margin-top: 40px;
+            position: relative;
+            min-height: 60px;
+        }
+
+        button {
+            padding: 15px 40px;
+            font-size: 20px;
+            font-weight: 600;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Poppins', sans-serif;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        #yesBtn {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+        }
+
+        #yesBtn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 20px rgba(245, 87, 108, 0.4);
+        }
+
+        #noBtn {
+            background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+            color: #333;
+            position: absolute;
+            transition: all 0.2s ease;
+        }
+
+        #noBtn:hover {
+            transform: scale(0.95);
+        }
+
+        .note {
+            margin-top: 30px;
+            font-size: 14px;
+            color: #666;
+            font-style: italic;
+        }
+
+        .sparkle {
+            position: absolute;
+            font-size: 20px;
+            animation: sparkle 1.5s infinite;
+        }
+
+        @keyframes sparkle {
+            0%, 100% {
+                opacity: 0;
+                transform: scale(0);
+            }
+            50% {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="hearts-background" id="heartsContainer"></div>
+    
+    <div class="container">
+        <div class="emoji">😍</div>
+        <h1>Hey Beautiful!</h1>
+        <p class="question">
+            Will you be my girlfriend? 💕
+        </p>
+        <div class="buttons">
+            <button id="yesBtn" onclick="handleYes()">Yes! 💖</button>
+            <button id="noBtn" onclick="handleNo()">No</button>
+        </div>
+        <p class="note">Choose wisely... 😉</p>
+    </div>
+
+    <script>
+        // Create floating hearts background
+        function createHeart() {
+            const heartsContainer = document.getElementById('heartsContainer');
+            const heart = document.createElement('div');
+            heart.className = 'heart';
+            heart.innerHTML = '❤️';
+            heart.style.left = Math.random() * 100 + '%';
+            heart.style.animationDuration = (Math.random() * 3 + 4) + 's';
+            heart.style.animationDelay = Math.random() * 2 + 's';
+            heartsContainer.appendChild(heart);
+
+            setTimeout(() => {
+                heart.remove();
+            }, 7000);
+        }
+
+        // Create hearts continuously
+        setInterval(createHeart, 300);
+
+        // Initialize some hearts
+        for (let i = 0; i < 10; i++) {
+            setTimeout(createHeart, i * 200);
+        }
+
+        let noClickCount = 0;
+        const noBtn = document.getElementById('noBtn');
+        const yesBtn = document.getElementById('yesBtn');
+
+        function handleNo() {
+            noClickCount++;
+            
+            // Move the No button to random position
+            const container = document.querySelector('.buttons');
+            const containerRect = container.getBoundingClientRect();
+            const btnRect = noBtn.getBoundingClientRect();
+            
+            const maxX = window.innerWidth - btnRect.width - 100;
+            const maxY = window.innerHeight - btnRect.height - 100;
+            
+            const randomX = Math.random() * maxX;
+            const randomY = Math.random() * maxY;
+            
+            noBtn.style.position = 'fixed';
+            noBtn.style.left = randomX + 'px';
+            noBtn.style.top = randomY + 'px';
+
+            // Make Yes button bigger and more attractive
+            const currentSize = 1 + (noClickCount * 0.1);
+            yesBtn.style.transform = `scale(${currentSize})`;
+
+            // Change messages based on click count
+            const messages = [
+                "Are you sure? 🥺",
+                "Really? Think again! 💭",
+                "Come on, give me a chance! 🙏",
+                "You're breaking my heart! 💔",
+                "Please? Pretty please? 🥹",
+                "I promise I'll make you happy! 😊",
+                "Just click Yes already! 😄",
+                "The Yes button is getting bigger for a reason! 😉",
+                "You know you want to say yes! 💕",
+                "Fine, keep running... but you'll say yes eventually! 😏"
+            ];
+
+            if (noClickCount <= messages.length) {
+                const note = document.querySelector('.note');
+                note.textContent = messages[noClickCount - 1];
+                note.style.color = '#f5576c';
+                note.style.fontWeight = '600';
+            }
+
+            // After 5 clicks, make No button smaller
+            if (noClickCount >= 5) {
+                const shrinkSize = Math.max(0.5, 1 - (noClickCount - 5) * 0.1);
+                noBtn.style.transform = `scale(${shrinkSize})`;
+            }
+
+            // After 10 clicks, make No button nearly invisible
+            if (noClickCount >= 10) {
+                noBtn.style.opacity = '0.3';
+                noBtn.textContent = '🏃‍♀️';
+            }
+        }
+
+        function handleYes() {
+            // Redirect to success page
+            window.location.href = 'proposal-success.html';
+        }
+
+        // Prevent No button from being clicked too easily on mobile
+        noBtn.addEventListener('touchstart', function(e) {
+            handleNo();
+            e.preventDefault();
+        });
+    </script>
+</body>
+</html>
