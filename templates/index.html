@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To My Love ❤️</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="hearts-background">
+        <div class="heart"></div>
+        <div class="heart"></div>
+        <div class="heart"></div>
+        <div class="heart"></div>
+        <div class="heart"></div>
+        <div class="heart"></div>
+    </div>
+
+    <div class="container">
+        <header class="hero">
+            <h1 class="main-title">To My Beautiful Girlfriend</h1>
+            <div class="heart-icon">❤️</div>
+            <p class="subtitle">You mean the world to me</p>
+        </header>
+
+        <section class="love-letter">
+            <h2>My Dearest Love,</h2>
+            <p class="intro-text">
+                Words cannot fully express how much you mean to me, but I want to try. 
+                Every day with you is a blessing, and I am so grateful to have you in my life.
+                You are my everything, and I love you more than you could ever imagine.
+            </p>
+        </section>
+
+        <section class="messages-section">
+            <h2>What My Heart Wants to Tell You</h2>
+            <div class="messages-grid">
+                {% for message in love_messages %}
+                <div class="message-card">
+                    <div class="card-icon">💕</div>
+                    <p>{{ message }}</p>
+                </div>
+                {% endfor %}
+            </div>
+        </section>
+
+        <section class="reasons-section">
+            <h2>Reasons Why I Love You</h2>
+            <div class="reasons-list">
+                {% for reason in reasons %}
+                <div class="reason-item">
+                    <span class="reason-number">{{ loop.index }}</span>
+                    <p>{{ reason }}</p>
+                </div>
+                {% endfor %}
+            </div>
+        </section>
+
+        <section class="final-message">
+            <div class="love-quote">
+                <p class="quote-text">
+                    "In all the world, there is no heart for me like yours. 
+                    In all the world, there is no love for you like mine."
+                </p>
+                <p class="quote-author">- Maya Angelou</p>
+            </div>
+            <div class="closing">
+                <h2>I Love You ❤️</h2>
+                <p>Forever and Always</p>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const cards = document.querySelectorAll('.message-card, .reason-item');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            cards.forEach(card => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(20px)';
+                card.style.transition = 'all 0.6s ease';
+                observer.observe(card);
+            });
+        });
+    </script>
+</body>
+</html>
