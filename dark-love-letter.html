@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A Letter For You ❤️</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        body::before {
+            content: '';
+            position: absolute;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.03) 1px, transparent 1px);
+            background-size: 50px 50px;
+            animation: drift 60s linear infinite;
+        }
+
+        @keyframes drift {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(50px, 50px); }
+        }
+
+        .hearts {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            pointer-events: none;
+        }
+
+        .heart {
+            position: absolute;
+            color: rgba(255, 107, 129, 0.3);
+            font-size: 20px;
+            animation: float 15s infinite;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        .letter-container {
+            background: rgba(30, 30, 46, 0.95);
+            border: 2px solid rgba(255, 107, 129, 0.3);
+            border-radius: 20px;
+            padding: 60px 50px;
+            max-width: 700px;
+            width: 100%;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5),
+                        0 0 40px rgba(255, 107, 129, 0.1);
+            position: relative;
+            z-index: 1;
+            animation: fadeIn 1.5s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .letter-header {
+            text-align: center;
+            margin-bottom: 40px;
+            border-bottom: 2px solid rgba(255, 107, 129, 0.2);
+            padding-bottom: 20px;
+        }
+
+        .letter-header h1 {
+            color: #ff6b81;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 0 0 20px rgba(255, 107, 129, 0.5);
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes glow {
+            from {
+                text-shadow: 0 0 10px rgba(255, 107, 129, 0.5);
+            }
+            to {
+                text-shadow: 0 0 20px rgba(255, 107, 129, 0.8);
+            }
+        }
+
+        .letter-header .subtitle {
+            color: #a8b2d1;
+            font-size: 1.1em;
+            font-style: italic;
+        }
+
+        .letter-body {
+            color: #e6e6fa;
+            line-height: 1.8;
+            font-size: 1.1em;
+            text-align: justify;
+        }
+
+        .letter-body p {
+            margin-bottom: 20px;
+            text-indent: 30px;
+        }
+
+        .letter-body p:first-child::first-letter {
+            font-size: 3em;
+            color: #ff6b81;
+            float: left;
+            line-height: 0.8;
+            margin: 5px 10px 0 0;
+            text-shadow: 0 0 10px rgba(255, 107, 129, 0.5);
+        }
+
+        .signature {
+            text-align: right;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 2px solid rgba(255, 107, 129, 0.2);
+        }
+
+        .signature p {
+            color: #ff6b81;
+            font-size: 1.3em;
+            font-style: italic;
+            margin: 5px 0;
+        }
+
+        .signature .date {
+            color: #a8b2d1;
+            font-size: 0.9em;
+            margin-top: 10px;
+        }
+
+        .decorative-heart {
+            position: absolute;
+            font-size: 40px;
+            opacity: 0.1;
+            color: #ff6b81;
+        }
+
+        .decorative-heart.top-left {
+            top: 20px;
+            left: 20px;
+            transform: rotate(-15deg);
+        }
+
+        .decorative-heart.top-right {
+            top: 20px;
+            right: 20px;
+            transform: rotate(15deg);
+        }
+
+        .decorative-heart.bottom-left {
+            bottom: 20px;
+            left: 20px;
+            transform: rotate(15deg);
+        }
+
+        .decorative-heart.bottom-right {
+            bottom: 20px;
+            right: 20px;
+            transform: rotate(-15deg);
+        }
+
+        @media (max-width: 768px) {
+            .letter-container {
+                padding: 40px 30px;
+            }
+
+            .letter-header h1 {
+                font-size: 2em;
+            }
+
+            .letter-body {
+                font-size: 1em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="hearts" id="hearts"></div>
+
+    <div class="letter-container">
+        <div class="decorative-heart top-left">❤</div>
+        <div class="decorative-heart top-right">❤</div>
+        <div class="decorative-heart bottom-left">❤</div>
+        <div class="decorative-heart bottom-right">❤</div>
+
+        <div class="letter-header">
+            <h1>To My Dearest Love</h1>
+            <p class="subtitle">A letter from my heart to yours</p>
+        </div>
+
+        <div class="letter-body">
+            <p>
+                Every moment I spend with you feels like a beautiful dream I never want to wake up from. You are the light that brightens my darkest days, the warmth that fills my coldest nights, and the reason my heart beats with such joy and purpose.
+            </p>
+
+            <p>
+                When I look into your eyes, I see my future, my happiness, and everything I've ever wished for. Your smile has the power to turn my worst days into the best ones, and your laughter is the sweetest melody I've ever heard. You make me believe in magic, because what we have is nothing short of magical.
+            </p>
+
+            <p>
+                I want you to know that you are cherished beyond words, loved beyond measure, and appreciated more than you could ever imagine. You inspire me to be a better person every single day. Your kindness, your strength, your beauty—both inside and out—leave me in awe.
+            </p>
+
+            <p>
+                Thank you for being you, for choosing me, and for making my life infinitely better just by being in it. I promise to love you with all that I am, to support you in all that you do, and to stand by your side through every adventure life brings our way.
+            </p>
+
+            <p>
+                You are my today and all of my tomorrows. I love you more than words could ever express, and I will spend forever showing you just how much you mean to me.
+            </p>
+        </div>
+
+        <div class="signature">
+            <p>Forever yours,</p>
+            <p>Your Love ❤️</p>
+            <p class="date">November 2, 2025</p>
+        </div>
+    </div>
+
+    <script>
+        // Create floating hearts
+        const heartsContainer = document.getElementById('hearts');
+        const heartSymbols = ['❤', '💕', '💖', '💗', '💝'];
+        
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.className = 'heart';
+            heart.textContent = heartSymbols[Math.floor(Math.random() * heartSymbols.length)];
+            heart.style.left = Math.random() * 100 + '%';
+            heart.style.animationDuration = (Math.random() * 10 + 10) + 's';
+            heart.style.animationDelay = Math.random() * 5 + 's';
+            heartsContainer.appendChild(heart);
+
+            setTimeout(() => {
+                heart.remove();
+            }, 20000);
+        }
+
+        // Create hearts periodically
+        setInterval(createHeart, 2000);
+        
+        // Create initial hearts
+        for (let i = 0; i < 5; i++) {
+            setTimeout(createHeart, i * 400);
+        }
+    </script>
+</body>
+</html>
