@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jarvis - Voice Assistant</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            overflow: hidden;
+        }
+        .container {
+            text-align: center;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 8px 32px rgba(31, 38, 135, 0.37);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+        }
+        h1 {
+            margin-bottom: 20px;
+            font-size: 2.5em;
+        }
+        button {
+            background: #4CAF50;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            font-size: 1.2em;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: background 0.3s;
+            margin: 10px;
+        }
+        button:hover {
+            background: #45a049;
+        }
+        button:active {
+            background: #3e8e41;
+        }
+        #response {
+            margin-top: 20px;
+            font-size: 1.5em;
+            min-height: 50px;
+        }
+        .listening {
+            animation: pulse 1s infinite;
+        }
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Jarvis</h1>
+        <p>Your Personal Voice Assistant</p>
+        <button id="startBtn">Start Listening</button>
+        <button id="stopBtn" style="display: none;">Stop Listening</button>
+        <div id="response"></div>
+    </div>
+
+    <script>
+        const startBtn = document.getElementById('startBtn');
+        const stopBtn = document.getElementById('stopBtn');
+        const responseDiv = document.getElementById('response');
+
+        let recognition;
+        let isListening = false;
+
+        // Check for browser support
+        if ('webkitSpeechRecognition' in window || 'SpeechRecognition' in window) {
+            const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+            recognition = new SpeechRecognition();
+            recognition.continuous = false;
+            recognition.interimResults = false;
+            recognition.lang = 'en-US';
+
+            recognition.onstart = function() {
+                isListening = true;
+                startBtn.style.display = 'none';
+                stopBtn.style.display = 'inline-block';
+                startBtn.classList.add('listening');
+                responseDiv.textContent = 'Listening...';
+            };
+
+            recognition.onresult = function(event) {
+                const transcript = event.results[0][0].transcript.toLowerCase();
+                responseDiv.textContent = `You said: "${transcript}"`;
+                processCommand(transcript);
+            };
+
+            recognition.onerror = function(event) {
+                responseDiv.textContent = 'Error occurred: ' + event.error;
+                stopListening();
+            };
+
+            recognition.onend = function() {
+                stopListening();
+            };
+        } else {
+            responseDiv.textContent = 'Speech recognition not supported in this browser.';
+            startBtn.disabled = true;
+        }
+
+        startBtn.addEventListener('click', function() {
+            if (recognition) {
+                recognition.start();
+            }
+        });
+
+        stopBtn.addEventListener('click', function() {
+            stopListening();
+        });
+
+        function stopListening() {
+            if (isListening) {
+                recognition.stop();
+                isListening = false;
+                startBtn.style.display = 'inline-block';
+                stopBtn.style.display = 'none';
+                startBtn.classList.remove('listening');
+            }
+        }
+
+        function processCommand(command) {
+            let response = '';
+
+            if (command.includes('hello') || command.includes('hi')) {
+                response = 'Hello! How can I assist you today?';
+            } else if (command.includes('time')) {
+                const now = new Date();
+                response = `The current time is ${now.toLocaleTimeString()}.`;
+            } else if (command.includes('date')) {
+                const now = new Date();
+                response = `Today's date is ${now.toLocaleDateString()}.`;
+            } else if (command.includes('weather')) {
+                response = 'I\'m sorry, I don\'t have access to weather information right now.';
+            } else if (command.includes('bye') || command.includes('goodbye')) {
+                response = 'Goodbye! Have a great day.';
+            } else {
+                response = 'I\'m sorry, I didn\'t understand that command. Try saying "hello", "time", "date", or "bye".';
+            }
+
+            responseDiv.textContent = response;
+            speak(response);
+        }
+
+        function speak(text) {
+            if ('speechSynthesis' in window) {
+                const utterance = new SpeechSynthesisUtterance(text);
+                utterance.rate = 1;
+                utterance.pitch = 1;
+                utterance.volume = 1;
+
+                // Optional: Choose a voice
+                const voices = speechSynthesis.getVoices();
+                const englishVoice = voices.find(voice => voice.lang.startsWith('en'));
+                if (englishVoice) {
+                    utterance.voice = englishVoice;
+                }
+
+                speechSynthesis.speak(utterance);
+            } else {
+                console.log('Speech synthesis not supported.');
+            }
+        }
+    </script>
+</body>
+</html>
