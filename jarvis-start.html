@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JARVIS - Getting Started</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #0a0e27 0%, #1a1f3a 50%, #0f1419 100%);
+            color: #ffffff;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            width: 100%;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 50px;
+            animation: fadeInDown 1s ease-out;
+        }
+
+        .header h1 {
+            font-size: 5rem;
+            font-weight: 700;
+            background: linear-gradient(45deg, #00d4ff, #0099ff, #00d4ff);
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: gradient 3s ease infinite;
+            text-shadow: 0 0 30px rgba(0, 212, 255, 0.5);
+            letter-spacing: 10px;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            font-size: 1.3rem;
+            color: #00d4ff;
+            opacity: 0.9;
+            letter-spacing: 3px;
+        }
+
+        .welcome-box {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            padding: 40px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(0, 212, 255, 0.2);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            animation: fadeIn 1s ease-out;
+            margin-bottom: 30px;
+        }
+
+        .welcome-text {
+            font-size: 1.2rem;
+            line-height: 1.8;
+            color: #b0b0b0;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .options-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .option-card {
+            background: rgba(0, 212, 255, 0.1);
+            border: 2px solid rgba(0, 212, 255, 0.3);
+            border-radius: 15px;
+            padding: 30px;
+            text-align: center;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            text-decoration: none;
+            display: block;
+        }
+
+        .option-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 30px rgba(0, 212, 255, 0.4);
+            border-color: #00d4ff;
+            background: rgba(0, 212, 255, 0.2);
+        }
+
+        .option-icon {
+            font-size: 4rem;
+            margin-bottom: 15px;
+        }
+
+        .option-title {
+            color: #00d4ff;
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .option-desc {
+            color: #b0b0b0;
+            font-size: 1rem;
+            line-height: 1.5;
+        }
+
+        .features-list {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            padding: 30px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(0, 212, 255, 0.2);
+            animation: fadeIn 1.2s ease-out;
+        }
+
+        .features-title {
+            color: #00d4ff;
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+        }
+
+        .feature-item {
+            background: rgba(0, 212, 255, 0.1);
+            padding: 15px;
+            border-radius: 10px;
+            border-left: 3px solid #00d4ff;
+        }
+
+        .feature-item strong {
+            color: #00d4ff;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes gradient {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 3rem;
+                letter-spacing: 5px;
+            }
+
+            .subtitle {
+                font-size: 1rem;
+            }
+
+            .options-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>J.A.R.V.I.S</h1>
+            <p class="subtitle">Just A Rather Very Intelligent System</p>
+        </div>
+
+        <div class="welcome-box">
+            <p class="welcome-text">
+                Welcome to JARVIS, your personal voice assistant! 
+                Choose how you'd like to interact with JARVIS below.
+            </p>
+
+            <div class="options-grid">
+                <a href="jarvis.html" class="option-card">
+                    <div class="option-icon">🎤</div>
+                    <div class="option-title">Voice Mode</div>
+                    <div class="option-desc">
+                        Use your microphone to speak commands naturally. 
+                        Full voice recognition and speech synthesis.
+                    </div>
+                </a>
+
+                <a href="jarvis-demo.html" class="option-card">
+                    <div class="option-icon">⌨️</div>
+                    <div class="option-title">Demo Mode</div>
+                    <div class="option-desc">
+                        Type commands to test JARVIS functionality. 
+                        Perfect for testing without a microphone.
+                    </div>
+                </a>
+
+                <a href="JARVIS-README.md" class="option-card" target="_blank">
+                    <div class="option-icon">📖</div>
+                    <div class="option-title">Documentation</div>
+                    <div class="option-desc">
+                        Read the complete guide with all commands, 
+                        features, and customization options.
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        <div class="features-list">
+            <h3 class="features-title">What JARVIS Can Do</h3>
+            <div class="features-grid">
+                <div class="feature-item">
+                    <strong>⏰ Time & Date</strong>
+                    Get current time and date information
+                </div>
+                <div class="feature-item">
+                    <strong>🔍 Web Search</strong>
+                    Search Google for any topic
+                </div>
+                <div class="feature-item">
+                    <strong>🌐 Navigation</strong>
+                    Open websites and your pages
+                </div>
+                <div class="feature-item">
+                    <strong>🧮 Calculator</strong>
+                    Perform mathematical calculations
+                </div>
+                <div class="feature-item">
+                    <strong>💬 Conversation</strong>
+                    Natural language interaction
+                </div>
+                <div class="feature-item">
+                    <strong>📝 History</strong>
+                    Track all your conversations
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

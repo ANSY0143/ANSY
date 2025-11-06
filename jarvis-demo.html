@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JARVIS Demo - Text Commands</title>
+    <link rel="stylesheet" href="jarvis-styles.css">
+    <style>
+        .demo-container {
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 30px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(0, 212, 255, 0.2);
+        }
+        
+        .demo-title {
+            color: #00d4ff;
+            text-align: center;
+            font-size: 2rem;
+            margin-bottom: 20px;
+        }
+        
+        .demo-input-group {
+            margin-bottom: 20px;
+        }
+        
+        .demo-input {
+            width: 100%;
+            padding: 15px;
+            font-size: 1.1rem;
+            background: rgba(0, 212, 255, 0.1);
+            border: 2px solid rgba(0, 212, 255, 0.3);
+            border-radius: 10px;
+            color: white;
+            outline: none;
+        }
+        
+        .demo-input:focus {
+            border-color: #00d4ff;
+            box-shadow: 0 0 20px rgba(0, 212, 255, 0.3);
+        }
+        
+        .demo-button {
+            width: 100%;
+            padding: 15px;
+            font-size: 1.1rem;
+            background: linear-gradient(135deg, #00d4ff, #0099ff);
+            border: none;
+            border-radius: 10px;
+            color: white;
+            cursor: pointer;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+        }
+        
+        .demo-button:hover {
+            transform: scale(1.02);
+            box-shadow: 0 5px 20px rgba(0, 212, 255, 0.5);
+        }
+        
+        .demo-response {
+            margin-top: 20px;
+            padding: 20px;
+            background: rgba(0, 212, 255, 0.1);
+            border-radius: 10px;
+            border-left: 4px solid #00d4ff;
+            min-height: 60px;
+        }
+        
+        .demo-response-label {
+            color: #00d4ff;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+        
+        .demo-response-text {
+            color: white;
+            font-size: 1.1rem;
+            line-height: 1.6;
+        }
+        
+        .quick-commands {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 10px;
+            margin-top: 20px;
+        }
+        
+        .quick-command-btn {
+            padding: 10px;
+            background: rgba(0, 212, 255, 0.2);
+            border: 1px solid rgba(0, 212, 255, 0.3);
+            border-radius: 8px;
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+        }
+        
+        .quick-command-btn:hover {
+            background: rgba(0, 212, 255, 0.3);
+            border-color: #00d4ff;
+        }
+        
+        .info-box {
+            background: rgba(255, 153, 0, 0.1);
+            border: 1px solid rgba(255, 153, 0, 0.3);
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 20px;
+            color: #ffaa00;
+        }
+        
+        .link-to-voice {
+            text-align: center;
+            margin-top: 30px;
+        }
+        
+        .link-to-voice a {
+            color: #00d4ff;
+            text-decoration: none;
+            font-size: 1.2rem;
+            font-weight: 600;
+            padding: 15px 30px;
+            border: 2px solid #00d4ff;
+            border-radius: 10px;
+            display: inline-block;
+            transition: all 0.3s ease;
+        }
+        
+        .link-to-voice a:hover {
+            background: #00d4ff;
+            color: #0a0e27;
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>J.A.R.V.I.S</h1>
+            <p class="subtitle">Demo Mode - Text Commands</p>
+        </div>
+
+        <div class="demo-container">
+            <h2 class="demo-title">Test JARVIS Commands</h2>
+            
+            <div class="info-box">
+                <strong>ℹ️ Demo Mode:</strong> This page lets you test JARVIS commands by typing them. 
+                For full voice experience, use <a href="jarvis.html" style="color: #ffaa00; text-decoration: underline;">jarvis.html</a>
+            </div>
+
+            <div class="demo-input-group">
+                <input 
+                    type="text" 
+                    id="commandInput" 
+                    class="demo-input" 
+                    placeholder="Type a command (e.g., 'what time is it')"
+                    autocomplete="off"
+                >
+            </div>
+
+            <button id="executeBtn" class="demo-button">Execute Command</button>
+
+            <div class="demo-response">
+                <div class="demo-response-label">JARVIS Response:</div>
+                <div id="responseText" class="demo-response-text">Type a command and click execute...</div>
+            </div>
+
+            <h3 style="color: #00d4ff; margin-top: 30px; margin-bottom: 15px;">Quick Commands:</h3>
+            <div class="quick-commands">
+                <button class="quick-command-btn" data-cmd="hello jarvis">Hello JARVIS</button>
+                <button class="quick-command-btn" data-cmd="what time is it">What time is it?</button>
+                <button class="quick-command-btn" data-cmd="what's the date">What's the date?</button>
+                <button class="quick-command-btn" data-cmd="calculate 25 times 4">Calculate 25 × 4</button>
+                <button class="quick-command-btn" data-cmd="search for javascript">Search JavaScript</button>
+                <button class="quick-command-btn" data-cmd="help">Help</button>
+            </div>
+
+            <div class="link-to-voice">
+                <a href="jarvis.html">🎤 Switch to Voice Mode</a>
+            </div>
+        </div>
+    </div>
+
+    <script src="jarvis.js"></script>
+    <script>
+        // Demo mode functionality
+        document.addEventListener('DOMContentLoaded', () => {
+            const commandInput = document.getElementById('commandInput');
+            const executeBtn = document.getElementById('executeBtn');
+            const responseText = document.getElementById('responseText');
+            const quickCommandBtns = document.querySelectorAll('.quick-command-btn');
+
+            // Override the speak function to display text instead of speaking
+            if (window.jarvis) {
+                window.jarvis.speak = function(text) {
+                    responseText.textContent = text;
+                    this.responseText.textContent = text;
+                };
+            }
+
+            function executeCommand(command) {
+                if (!command.trim()) {
+                    responseText.textContent = 'Please enter a command.';
+                    return;
+                }
+
+                responseText.textContent = 'Processing...';
+                
+                // Simulate the command processing
+                setTimeout(() => {
+                    if (window.jarvis) {
+                        window.jarvis.transcriptText.textContent = command;
+                        window.jarvis.processCommand(command);
+                    }
+                }, 100);
+            }
+
+            executeBtn.addEventListener('click', () => {
+                executeCommand(commandInput.value);
+            });
+
+            commandInput.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') {
+                    executeCommand(commandInput.value);
+                }
+            });
+
+            quickCommandBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const cmd = btn.getAttribute('data-cmd');
+                    commandInput.value = cmd;
+                    executeCommand(cmd);
+                });
+            });
+
+            // Focus input on load
+            commandInput.focus();
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JARVIS - Voice Assistant</title>
+    <link rel="stylesheet" href="jarvis-styles.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>J.A.R.V.I.S</h1>
+            <p class="subtitle">Just A Rather Very Intelligent System</p>
+        </div>
+
+        <div class="main-interface">
+            <div class="visualizer-container">
+                <div class="pulse-ring"></div>
+                <div class="pulse-ring delay-1"></div>
+                <div class="pulse-ring delay-2"></div>
+                <button id="micButton" class="mic-button">
+                    <svg class="mic-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"></path>
+                        <path d="M19 10v2a7 7 0 0 1-14 0v-2"></path>
+                        <line x1="12" y1="19" x2="12" y2="23"></line>
+                        <line x1="8" y1="23" x2="16" y2="23"></line>
+                    </svg>
+                </button>
+            </div>
+
+            <div class="status-container">
+                <p id="status" class="status-text">Click the microphone to start</p>
+            </div>
+
+            <div class="transcript-container">
+                <div class="transcript-box">
+                    <p class="transcript-label">You said:</p>
+                    <p id="transcript" class="transcript-text">...</p>
+                </div>
+                <div class="response-box">
+                    <p class="response-label">JARVIS:</p>
+                    <p id="response" class="response-text">...</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="commands-section">
+            <h3>Available Commands</h3>
+            <div class="commands-grid">
+                <div class="command-card">
+                    <h4>Time & Date</h4>
+                    <p>"What time is it?"</p>
+                    <p>"What's the date?"</p>
+                </div>
+                <div class="command-card">
+                    <h4>Search</h4>
+                    <p>"Search for [query]"</p>
+                    <p>"Google [query]"</p>
+                </div>
+                <div class="command-card">
+                    <h4>Navigation</h4>
+                    <p>"Open [website]"</p>
+                    <p>"Go to YouTube"</p>
+                </div>
+                <div class="command-card">
+                    <h4>Calculator</h4>
+                    <p>"Calculate [expression]"</p>
+                    <p>"What is 25 times 4?"</p>
+                </div>
+                <div class="command-card">
+                    <h4>System</h4>
+                    <p>"Open home page"</p>
+                    <p>"Open login page"</p>
+                </div>
+                <div class="command-card">
+                    <h4>General</h4>
+                    <p>"Hello JARVIS"</p>
+                    <p>"Help"</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="history-section">
+            <h3>Conversation History</h3>
+            <div id="history" class="history-container"></div>
+            <button id="clearHistory" class="clear-button">Clear History</button>
+        </div>
+    </div>
+
+    <script src="jarvis.js"></script>
+</body>
+</html>
